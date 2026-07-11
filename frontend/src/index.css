@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #1e293b;
+    background: linear-gradient(180deg, #FF9933 0%, #FFB366 12%, #ffe8cc 20%, #fff5e6 28%, #ffffff 35%, #f0fdf4 45%, #dcfce7 55%, #bbf7d0 65%, #138808 80%, #0d6b06 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  * { border-color: #d1d5db; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-semibold text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-gradient-to-r from-brand-600 to-green-700 text-white shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5 focus:ring-brand-500; }
+  .btn-secondary { @apply btn bg-white/80 text-green-800 border-2 border-green-600 hover:bg-green-50 focus:ring-green-500; }
+  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500; }
+  .btn-success { @apply btn bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500; }
+  .btn-flag { @apply btn bg-gradient-to-r from-brand-500 to-green-600 text-white shadow-lg hover:from-brand-600 hover:to-green-700 hover:-translate-y-0.5 focus:ring-brand-500; }
+  .card { @apply bg-white/80 backdrop-blur-md rounded-2xl shadow-md border-t-4 border-brand-500 p-6; }
+  .card-green { @apply bg-white/80 backdrop-blur-md rounded-2xl shadow-md border-t-4 border-emerald-600 p-6; }
+  .card-navy { @apply bg-white/80 backdrop-blur-md rounded-2xl shadow-md border-t-4 border-blue-900 p-6; }
+  .input { @apply w-full rounded-xl border border-slate-300 bg-white/80 backdrop-blur-sm px-4 py-2.5 text-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20; }
+  .label { @apply block text-sm font-semibold text-slate-800 mb-1.5; }
+  .badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+  .flag-section-saffron { @apply bg-gradient-to-br from-brand-500 via-orange-400 to-brand-600 text-white; }
+  .flag-section-green { @apply bg-gradient-to-br from-emerald-700 via-green-600 to-emerald-500 text-white; }
+}
+
+@keyframes flagWave {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(-5px) translateY(-3px); }
+  50% { transform: translateX(0) translateY(0); }
+  75% { transform: translateX(5px) translateY(-3px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes flagSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes saffronPulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.05); }
+}
+
+@keyframes greenPulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.05); }
+}
+
+.flag-wave { animation: flagWave 4s ease-in-out infinite; }
+.flag-slide { animation: flagSlide 1s ease-out forwards; }
+.saffron-pulse { animation: saffronPulse 3s ease-in-out infinite; }
+.green-pulse { animation: greenPulse 3s ease-in-out infinite 1.5s; }
