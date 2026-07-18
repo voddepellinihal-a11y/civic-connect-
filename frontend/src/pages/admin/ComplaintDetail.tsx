@@ -27,11 +27,12 @@ export default function AdminComplaintDetail() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const params = new URLSearchParams();
-      if (form.department) params.append('department', form.department);
-      if (form.priority) params.append('priority', form.priority);
-      if (form.remarks) params.append('remarks', form.remarks);
-      const res = await api.put(`/complaints/${id}/admin?${params.toString()}`);
+      const fd = new FormData();
+      if (form.department) fd.append('department', form.department);
+      if (form.priority) fd.append('priority', form.priority);
+      if (form.remarks) fd.append('remarks', form.remarks);
+      if (afterFile) fd.append('afterImage', afterFile);
+      const res = await api.put(`/complaints/${id}/admin`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
 
       if (form.status !== complaint?.status) {
         await api.put(`/complaints/${id}/status`, { status: form.status, notes: form.remarks || `Status changed to ${form.status}` });

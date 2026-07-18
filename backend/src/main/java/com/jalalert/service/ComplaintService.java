@@ -178,8 +178,9 @@ public class ComplaintService {
                 String fileName = "after_" + id + "_" + System.currentTimeMillis() + "_" + afterImage.getOriginalFilename();
                 Path path = Paths.get(uploadDir).resolve(fileName);
                 Files.createDirectories(path.getParent());
-                afterImage.transferTo(path.toFile());
+                Files.copy(afterImage.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
                 complaint.setAfterFilePath("/uploads/" + fileName);
+                log.info("Admin image saved: {}", path);
             } catch (IOException e) {
                 log.warn("Failed to save after image: {}", e.getMessage());
             }

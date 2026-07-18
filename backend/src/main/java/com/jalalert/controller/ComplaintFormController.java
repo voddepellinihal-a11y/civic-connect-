@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jalalert.repository.ComplaintRepository;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +25,7 @@ import java.util.UUID;
 public class ComplaintFormController {
 
     private final ComplaintService complaintService;
+    private final ComplaintRepository complaintRepository;
 
     private static final String UPLOAD_DIR = "uploads";
 
@@ -52,6 +55,8 @@ public class ComplaintFormController {
                 Path uploadPath = Paths.get(UPLOAD_DIR);
                 Files.createDirectories(uploadPath);
                 Files.copy(file.getInputStream(), uploadPath.resolve(filename));
+                complaint.setFilePath("/uploads/" + filename);
+                complaintRepository.save(complaint);
                 log.info("File uploaded: {}", filename);
             } catch (IOException e) {
                 log.error("File upload failed", e);

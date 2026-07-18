@@ -52,7 +52,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/complaints/**", "/api/analytics/**").permitAll()
-                .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**", "/uploads/**").permitAll()
                 .requestMatchers("/", "/dashboard", "/analytics", "/error", "/submit").permitAll()
                 .requestMatchers(HttpMethod.POST, "/submit").permitAll()
                 .requestMatchers("/ws/**").permitAll()
